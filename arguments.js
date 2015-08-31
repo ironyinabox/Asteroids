@@ -38,9 +38,31 @@ function curriedSum(numArgs) {
   return _curriedSum;
 }
 
+Function.prototype.curry = function (numArgs) {
+  var args = [];
+  var fn = this;
+  var _curried = function(arg) {
+    args.push(arg);
+    if (args.length === numArgs) {
+      debugger;
+      return fn.apply(this, args);
+    }
+    else {
+      return _curried;
+    }
+  }
+  return _curried;
+};
 
+var add = function (a, b) {
+  debugger;
+  return a + b;
+};
 
 // ***for testing purposes****
+//
+// currySum = sum.curry(2);
+// currySum(4)(5);
 // var manySum = curriedSum(2);
 // manySum(5)(30);
 // function Cat(name) {
